@@ -40,8 +40,48 @@ cout<<"**'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 cin >> choice;
 cin.ignore();
-
 switch (choice)
 {
 case 1:
+    tms.addvehocle();
+    break;
+case 2:
+    tms.recordviolation();
+    break;
+case3:
+    tms.searchVehicle();
+    break;
+case 4:
+    tms.addTrafficBooth();
+    break;
+case 5:
+    tms.simulateBoothEntry();
+    break;
+case 6:
+    tms.simulateBoothExit();
+    break;
+case 7:
+    tms.displayEmergencyInfo();
+    break;
+case 8:
+    tms.displayAllVehicles();
+    break;
+case 9:
+    tms.displayAllBooth();
+    break;
+case 0:
+    cout << "Exiting..." << endl;
+    break;
+default:
+    cout << "Invalid choice.Please try again." << endl;
+}
+}
+while (choice != 0);
+
+return 0;
+}
+
+
+
+
 
