@@ -1,3 +1,151 @@
+class TrafficManagementSystem
+{
+private:
+    vector<Vehicle> vehicles;
+    vector<TrafficBooth> booths;
+    EmergencyInfo emergencyInfo;
+
+public:
+    void addVehicle()
+    {
+        string regNum, owner;
+        cout << "Enter Registration Number: ";
+        cin >> regNum;
+        cin.ignore();
+        cout << "Enter Owner Name: ";
+        getline(cin, owner);
+        vehicles.emplace_back(regNum, owner);
+        cout << "Vehicle added successfully." << endl;
+    }
+
+    void recordViolation()
+    {
+        string regNum, violation;
+        cout << "Enter Vehicle Registration Number: ";
+        cin >> regNum;
+        cin.ignore();
+        cout << "Enter Violation: ";
+        getline(cin, violation);
+
+        for (auto& vehicle : vehicles)
+        {
+            if (vehicle.registrationNumber == regNum)
+            {
+                vehicle.addViolation(violation);
+                cout << "Violation recorded successfully." << endl;
+                return;
+            }
+        }
+        cout << "Vehicle not found." << endl;
+    }
+
+    void searchVehicle()
+    {
+        string query;
+        cout << "Enter Registration Number or Owner Name: ";
+        getline(cin, query);
+
+        if (vehicles.empty())
+        {
+            cout << "No vehicles registered yet." << endl;
+            return;
+        }
+
+        for (const auto& vehicle : vehicles)
+        {
+            if (vehicle.registrationNumber == query || vehicle.ownerName == query)
+            {
+                vehicle.displayDetails();
+                return;
+            }
+        }
+        cout << "Vehicle not found." << endl;
+    }
+
+    void addTrafficBooth()
+    {
+        string location;
+        cout << "Enter Booth Location: ";
+        getline(cin, location);
+        booths.emplace_back(location);
+        cout << "Traffic booth added successfully." << endl;
+    }
+
+    void simulateBoothEntry()
+    {
+        string location;
+        cout << "Enter Booth Location: ";
+        getline(cin, location);
+
+        for (auto& booth : booths)
+        {
+            if (booth.location == location)
+            {
+                booth.vehicleEntry();
+                cout << "Vehicle entry recorded at " << location << endl;
+                return;
+            }
+        }
+        cout << "Booth not found." << endl;
+    }
+
+    void simulateBoothExit()
+    {
+        string location;
+        cout << "Enter Booth Location: ";
+        getline(cin, location);
+
+        for (auto& booth : booths)
+        {
+            if (booth.location == location)
+            {
+                booth.vehicleExit();
+                cout << "Vehicle exit recorded at " << location << endl;
+                return;
+            }
+        }
+        cout << "Booth not found." << endl;
+    }
+
+    void displayEmergencyInfo() const
+    {
+        emergencyInfo.display();
+    }
+
+    void displayAllVehicles() const
+    {
+        if (vehicles.empty())
+        {
+            cout << "No vehicles registered." << endl;
+        }
+        else
+        {
+            for (const auto& vehicle : vehicles)
+            {
+                vehicle.displayDetails();
+                cout << endl;
+            }
+        }
+    }
+
+    void displayAllBooths() const
+    {
+        if (booths.empty())
+        {
+            cout << "No traffic booths registered." << endl;
+        }
+        else
+        {
+            for (const auto& booth : booths)
+            {
+                booth.displayStats();
+                cout << endl;
+            }
+        }
+    }
+};
+
+
 int main()
 {
   TrafficManagementSystem tsm;
